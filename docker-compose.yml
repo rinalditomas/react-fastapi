@@ -15,3 +15,7 @@ services:
       - "8001:8000"
     volumes:
       - ./backend:/app
+      - backend-db:/app/db  # This line adds a named volume for the SQLite database
+
+volumes:
+  backend-db:  # This defines the named volume
