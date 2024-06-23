@@ -15,6 +15,10 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
+def get_all_users(db: Session):
+    return db.query(models.User).all()
+
+
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
@@ -53,8 +57,6 @@ def get_user_connections(db: Session, user_id: UUID) -> List[models.User]:
 
 
 
-def get_all_users(db: Session):
-    return db.query(models.User).all()
 
 
 
@@ -95,11 +97,6 @@ def modify_user(db: Session, user_id: UUID, updated_user: schemas.UserCreate):
         return db_user
     return None
 
-def get_user_profile_with_connections(db: Session, user_id: UUID):
-    user_with_connections = db.query(models.User).options(
-        joinedload(models.User.connections).joinedload(models.Connection.owner)
-    ).filter(models.User.id == user_id).first()
-    return user_with_connections
 
 def get_possible_users_to_connect(db: Session, user_id: UUID) -> List[models.User]:
     # Query to fetch user IDs that the current user is already connected with as initiator
