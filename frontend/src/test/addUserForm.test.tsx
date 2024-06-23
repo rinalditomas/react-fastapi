@@ -18,6 +18,10 @@ describe("AddUserForm Component", () => {
       />
     );
   });
+  afterEach(() => {
+    jest.clearAllMocks();
+    jest.useRealTimers(); 
+  });
 
   it("renders the form", () => {
     expect(screen.getByPlaceholderText(/john doe/i)).toBeInTheDocument();
@@ -69,9 +73,10 @@ describe("AddUserForm Component", () => {
     });
 
     fireEvent.submit(screen.getByRole("button", { name: /create/i }));
+    jest.runAllTimers();
 
     await waitFor(() => {
-      expect(screen.getByTestId("successful-message")).toBeInTheDocument(); // Corrected the typo here
+      expect(screen.getByTestId("successful-message")).toBeInTheDocument();
       expect(mockSetOpenModal).toHaveBeenCalledWith(false);
     });
   });
