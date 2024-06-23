@@ -7,6 +7,8 @@ from db.database import engine, get_db
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 from routes.users import router as user_router
+from routes.stats import router as stats_router
+
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -22,3 +24,4 @@ app.add_middleware(
 )
 
 app.include_router(user_router)
+app.include_router(stats_router)  # Include the stats router
