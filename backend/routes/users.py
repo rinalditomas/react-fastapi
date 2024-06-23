@@ -77,7 +77,6 @@ def read_user_connections(user_id: UUID, db: Session = Depends(get_db)):
     return crud.get_user_connections(user_id=user_id, db=db)
 
 
-
 @router.delete("/{user_id}")
 def delete_user(user_id: UUID, db: Session = Depends(get_db)):
     try:
@@ -91,7 +90,6 @@ def delete_user(user_id: UUID, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail="Could not delete the user.")
 
 
-
 @router.put("/{user_id}")
 def modify_user(user_id: UUID, user: schemas.UserCreate, db: Session = Depends(get_db)):
     try:
@@ -103,7 +101,6 @@ def modify_user(user_id: UUID, user: schemas.UserCreate, db: Session = Depends(g
     except:
         db.rollback()
         raise HTTPException(status_code=500, detail="Could not update the user.")
-
 
 
 @router.get("/{user_id}/possible_connections", response_model=List[schemas.User])
