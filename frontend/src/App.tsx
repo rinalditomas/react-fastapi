@@ -1,23 +1,18 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import UsersView from "./components/users/usersView";
+import UserProfile from "./components/users/userProfile";
+import UserStats from "./components/users/userStats";
 
 function App() {
-  const [message, setMessage] = useState("Loading...");
-
-  useEffect(() => {
-    fetch("http://localhost:8001/")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("data", data);
-        setMessage(data.Hello);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
   return (
-    <div className="App">
-      <h1>Message from Backend:</h1>
-      <p>{message}</p>{" "}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<UserStats />} />
+        <Route path="/users" element={<UsersView />} />
+        <Route path="/users/:userId" element={<UserProfile />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
