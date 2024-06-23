@@ -46,6 +46,7 @@ export default function UsersView(props: UsersViewProps) {
         <div>
           <p>No users found.</p>
           <button
+            data-testid="create-first-user"
             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               setOpenModal(true);

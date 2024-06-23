@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import Loading from "../common/loading";
+import axios from "axios";
 
 export interface AddUserFormProps {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
@@ -27,21 +28,8 @@ export default function AddUserForm({
       setError(null);
       setLoading(true);
 
-      const response = await fetch("http://localhost:8001/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      const response = await axios.post("http://localhost:8001/users", user);
 
-      if (!response.ok) {
-        const errorBody = await response.json();
-
-        const errorMessage = errorBody.detail || "Failed to create a new user";
-        throw new Error(errorMessage);
-      }
-      const data = await response.json();
       setLoading(false);
       setShowSuccess(true);
       setTimeout(() => {
@@ -50,12 +38,14 @@ export default function AddUserForm({
         setOpenModal(false);
       }, 1000);
     } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
+      if (axios.isAxiosError(error)) {
+        const errorMessage =
+          error.response?.data.detail || "Failed to create a new user";
+        setError(errorMessage);
       } else {
         setError("An unexpected error occurred");
-        setLoading(false);
       }
+      setLoading(false);
     }
   };
 
@@ -63,7 +53,7 @@ export default function AddUserForm({
 
   if (showSuccess) {
     return (
-      <div className="flex items-center justify-center flex-col space-y-2">
+      <div data-testid='successful-message' className="flex items-center justify-center flex-col space-y-2">
         <h1 className="text-gray-700 text-lg font-medium">
           User succcesfully created
         </h1>
@@ -94,7 +84,7 @@ export default function AddUserForm({
   }
 
   return (
-    <div className="w-11/12 mx-auto">
+    <div data-testid="addUserForm" className="w-11/12 mx-auto">
       <h3 className="text-xl font-semibold leading-6 text-gray-900">
         Add a new user
       </h3>

@@ -22,7 +22,7 @@ export default function Header({
       <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
         <div className="ml-4 mt-4 flex space-x-4 items-center">
           {backButton && (
-            <button onClick={goBack}>
+            <button data-testid="header-back-button" onClick={goBack}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ export default function Header({
             </button>
           )}
           <data value="">
-            <h3 className="text-base font-semibold leading-6 text-gray-900">
+            <h3 data-testid='header-title' className="text-base font-semibold leading-6 text-gray-900">
               {title}
             </h3>
             <p className="mt-1 text-sm text-gray-500">{description}</p>
@@ -58,6 +58,7 @@ export default function Header({
         {onClick && buttonText && (
           <div className="ml-4 mt-4 flex-shrink-0">
             <button
+              data-testid="header-action-button"
               onClick={onClick}
               type="button"
               className="relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

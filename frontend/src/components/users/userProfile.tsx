@@ -90,7 +90,10 @@ function UserProfile() {
               <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
                 Full name
               </dt>
-              <dd className="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+              <dd
+                data-testid="user-name"
+                className="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto"
+              >
                 <div className="text-gray-900">{userProfile?.name}</div>
               </dd>
             </div>
@@ -98,7 +101,10 @@ function UserProfile() {
               <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
                 Email address
               </dt>
-              <dd className="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+              <dd
+                data-testid="user-email"
+                className="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto"
+              >
                 <div className="text-gray-900">{userProfile?.email}</div>
               </dd>
             </div>
@@ -115,7 +121,9 @@ function UserProfile() {
                 Number of Connections
               </dt>
               <dd className="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-                <div className="text-gray-900">{userConnections.length}</div>
+                <div data-testid="user-connections-number" className="text-gray-900">
+                  {userConnections.length}
+                </div>
               </dd>
             </div>
           </dl>
