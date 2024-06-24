@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 import crud  # Import the CRUD operations
-import models
+import backend.models.models as models
 import schemas
 from db.database import engine, get_db
 from typing import List

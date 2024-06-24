@@ -58,6 +58,15 @@ def read_user(user_id: UUID, db: Session = Depends(get_db)):
 def create_connection(connection_create: schemas.ConnectionCreate, db: Session = Depends(get_db)):
     user_id_1 = connection_create.user_id
     user_id_2 = connection_create.connected_user_id
+
+     # Check if both users exist
+    user1 = crud.get_user_by_id(db=db, user_id=user_id_1)
+    if not user1:
+        raise HTTPException(status_code=404, detail=f"User with id {user_id_1} does not exist.")
+    
+    user2 = crud.get_user_by_id(db=db, user_id=user_id_2)
+    if not user2:
+        raise HTTPException(status_code=404, detail=f"User with id {user_id_2} does not exist.")
     
     # Check if the connection already exists
     existing_connection = crud.get_connection(db=db, user_id_1=user_id_1, user_id_2=user_id_2)
