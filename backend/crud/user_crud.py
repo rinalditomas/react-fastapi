@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func
-import models
+import backend.models.models as models
 import schemas
 from typing import List
 from uuid import UUID
