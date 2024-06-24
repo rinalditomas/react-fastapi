@@ -66,4 +66,5 @@ Things that due to the time constrain I was not able to achieve.
 - [ ] Set up workflow to run backend test.
 - [ ] Add pre-commit.
 - [ ] Create a github action to run pre-commit and check the code on every PR
-- [ ] add a state manager in the frontend.
+- [ ] Add a state manager in the frontend.
+- [ ] Make the frontend responsive
